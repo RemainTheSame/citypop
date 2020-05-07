@@ -1,6 +1,7 @@
 import React from "react"
 import SearchSelector from "./SearchSelector";
 import SearchByComponent from "./SearchByComponent";
+import SearchResults from "./SearchResults";
 
 /*
 
@@ -19,11 +20,10 @@ class MainContainer extends React.Component{
     render() {
         return (
             <div>This is the main container!
-
                <SearchSelector/>
                <SearchByComponent selection={"CITY"}/>
-                <SearchByComponent selection={"COUNTRY"}/>
-
+               <SearchByComponent selection={"COUNTRY"}/>
+               <SearchResults input={"France"}/>
             </div>
 
         )
