@@ -15,8 +15,10 @@ class SearchByComponent extends React.Component{
         super()
         this.state = {
             currentSelection: props.selection,
-            textInput:""
+            textInput:"",
+            result: "result?"
         }
+
     }
 
     //Updates input field
@@ -25,8 +27,17 @@ class SearchByComponent extends React.Component{
     }
 
     //Called when search form is submitted
-    handleSearch(){
+    handleSearch=(event)=>{
+        event.preventDefault()
+        //Test Fetch:
+        console.log("Starting Fetch...")
+        fetch("https://jsonplaceholder.typicode.com/posts/1")
+            .then(response => response.json())
+            .then(data => this.setState({
+                result: data.title
+            }))
         console.log("Search done")
+
     }
 
     render() {
@@ -37,6 +48,7 @@ class SearchByComponent extends React.Component{
                     <input placeholder={"Enter a "+this.state.currentSelection} value={this.state.textInput} onChange={this.handleInput}/>
                     <input type={"submit"} value={"search"}/>
                 </form>
+                <h2>{this.state.result}</h2>
             </div>
         )
     }
