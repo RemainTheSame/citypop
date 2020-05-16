@@ -31,11 +31,24 @@ class SearchByComponent extends React.Component{
         event.preventDefault()
         //Test Fetch:
         console.log("Starting Fetch...")
+        /*
         fetch("https://jsonplaceholder.typicode.com/posts/1")
             .then(response => response.json())
             .then(data => this.setState({
                 result: data.title
             }))
+
+         */
+
+        let country = "FR"
+        let username = "weknowit"
+        let orderby = "population"
+        let url = "http://api.geonames.org/searchJSON?country="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => console.log(data))
+
         console.log("Search done")
 
     }
