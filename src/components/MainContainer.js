@@ -15,14 +15,34 @@ MainContainer
 class MainContainer extends React.Component{
     constructor(){
         super()
+        this.state={
+            selection: "none"
+        }
+    }
+
+    renderSearchComponent=(searchSelection)=>{
+
+        this.setState({
+            selection: searchSelection
+        })
+        console.log("selection updated")
     }
 
     render() {
-        return (
+        let searchComponent;
+        if(this.state.selection === "none"){
+            searchComponent = <div>Nothing selected</div>
+        }
+        else if(this.state.selection === "CITY"){
+            searchComponent = <SearchByComponent selection={"CITY"}/>
+        }
+        else{
+            searchComponent = <SearchByComponent selection={"COUNTRY"}/>
+        }
+            return (
             <div>This is the main container!
-               <SearchSelector/>
-               <SearchByComponent selection={"CITY"}/>
-               <SearchByComponent selection={"COUNTRY"}/>
+               <SearchSelector selection={this.renderSearchComponent}/>
+                {searchComponent}
                <SearchResults input={"France"}/>
             </div>
 
