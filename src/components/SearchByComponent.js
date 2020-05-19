@@ -57,16 +57,23 @@ class SearchByComponent extends React.Component{
 
         }
         else if(this.state.currentSelection === "CITY"){
-            /*
-            let country = "FR"
+
+            let city = this.state.textInput
             let username = "weknowit"
             let orderby = "population"
-            let url = "http://api.geonames.org/searchJSON?country="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+            let url = "http://api.geonames.org/searchJSON?q="+city+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+
 
             fetch(url)
                 .then(response => response.json())
-                .then(data => console.log(data))
-                */
+                .then(data => {
+                    console.log(data)
+                    this.setState({
+                        result: data.geonames[0].population
+                    })
+
+                })
+
              console.log("CITY SEARCH")
         }
 
