@@ -31,23 +31,46 @@ class SearchByComponent extends React.Component{
         event.preventDefault()
         //Test Fetch:
         console.log("Starting Fetch...")
-        /*
-        fetch("https://jsonplaceholder.typicode.com/posts/1")
-            .then(response => response.json())
-            .then(data => this.setState({
-                result: data.title
-            }))
 
-         */
+        if(this.state.currentSelection === "COUNTRY"){
 
-        let country = "FR"
-        let username = "weknowit"
-        let orderby = "population"
-        let url = "http://api.geonames.org/searchJSON?country="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+            let country = this.state.textInput
+            //let country = "FR"
+            let username = "weknowit"
+            let orderby = "population"
+            let url = "http://api.geonames.org/searchJSON?q="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
 
-        fetch(url)
-            .then(response => response.json())
-            .then(data => console.log(data))
+            let cities = [];
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    cities[0] = data.geonames[0].name;
+                    cities[1] = data.geonames[1].name;
+                    cities[2] = data.geonames[2].name;
+                    this.setState({
+                        result: cities
+                    })
+                })
+            console.log("COUNTRY SEARCH")
+
+        }
+        else if(this.state.currentSelection === "CITY"){
+            /*
+            let country = "FR"
+            let username = "weknowit"
+            let orderby = "population"
+            let url = "http://api.geonames.org/searchJSON?country="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => console.log(data))
+                */
+             console.log("CITY SEARCH")
+        }
+
+
 
         console.log("Search done")
 
