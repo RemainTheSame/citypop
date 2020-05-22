@@ -18,9 +18,12 @@ class SearchResults extends React.Component{
 
         let result = <div></div>
         if(!Array.isArray(this.props.result)){
-            result = <h3>{this.props.result}</h3>
+
+            let population = <h3>{this.props.result}</h3>
+            result = <div><h3>Population</h3>{population}</div>
         }
         else {
+
             result = this.props.result.map((city)=><li key={city.toString()}>{city}</li>)
         }
 
