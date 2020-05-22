@@ -15,17 +15,19 @@ class SearchSelector extends React.Component{
     }
 
     selectCity=()=>{
+        console.log("City selected..")
         this.props.selection("CITY")
     }
 
     selectCountry=()=>{
+        console.log("Country selected..")
         this.props.selection("COUNTRY")
     }
 
 
     render() {
         return (
-            <div>This is the search container!
+            <div>
             <button onClick={this.selectCity}>SEARCH BY CITY</button>
             <button onClick={this.selectCountry}>SEARCH BY COUNTRY</button>
             </div>

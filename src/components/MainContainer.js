@@ -1,7 +1,6 @@
 import React from "react"
 import SearchSelector from "./SearchSelector";
-import SearchByComponent from "./SearchByComponent";
-import SearchResults from "./SearchResults";
+import SearchComponent from "./SearchComponent";
 
 /*
 
@@ -10,6 +9,7 @@ MainContainer
 - Search type selection container
 - Contains both search components (city and country)
 - Handles switch between internal components onClick, Request etc.
+- Reset by clicking "CityPop" header
 
  */
 class MainContainer extends React.Component{
@@ -18,6 +18,12 @@ class MainContainer extends React.Component{
         this.state={
             selection: "none"
         }
+    }
+
+    resetMain=()=>{
+        this.setState({
+            selection: "none"
+        })
     }
 
     renderSearchComponent=(searchSelection)=>{
@@ -29,21 +35,25 @@ class MainContainer extends React.Component{
     }
 
     render() {
+        console.log("rerender")
         let searchComponent;
+        let searchSelector = <SearchSelector selection={this.renderSearchComponent}/>
         if(this.state.selection === "none"){
-            searchComponent = <div>Nothing selected</div>
+            searchComponent = <div></div>
         }
         else if(this.state.selection === "CITY"){
-            searchComponent = <SearchByComponent selection={"CITY"}/>
+            searchComponent = <SearchComponent selection={this.state.selection}/>
+            searchSelector = <div></div>
         }
         else{
-            searchComponent = <SearchByComponent selection={"COUNTRY"}/>
+            searchComponent = <SearchComponent selection={this.state.selection}/>
+            searchSelector = <div></div>
         }
             return (
-            <div>This is the main container!
-               <SearchSelector selection={this.renderSearchComponent}/>
+            <div>
+                <h1 onClick={this.resetMain}>CityPop</h1>
+                {searchSelector}
                 {searchComponent}
-               <SearchResults input={"France"}/>
             </div>
 
         )

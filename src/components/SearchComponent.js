@@ -1,22 +1,23 @@
 import React from "react"
+import SearchResults from "./SearchResults";
 
 /*
 
-SearchByComponent
+SearchComponent
 
 - Search Field
 - Form submission
 - One component for both possible search selections
 
  */
-class SearchByComponent extends React.Component{
+class SearchComponent extends React.Component{
     //Shows
     constructor(props){
         super()
         this.state = {
-            currentSelection: props.selection,
             textInput:"",
-            result: "result?"
+            result: "result?",
+            search: false
         }
 
     }
@@ -32,7 +33,7 @@ class SearchByComponent extends React.Component{
         //Test Fetch:
         console.log("Starting Fetch...")
 
-        if(this.state.currentSelection === "COUNTRY"){
+        if(this.props.selection === "COUNTRY"){
 
             let country = this.state.textInput
             //let country = "FR"
@@ -50,13 +51,14 @@ class SearchByComponent extends React.Component{
                     cities[1] = data.geonames[1].name;
                     cities[2] = data.geonames[2].name;
                     this.setState({
-                        result: cities
+                        result: cities,
+                        search: true
                     })
                 })
             console.log("COUNTRY SEARCH")
 
         }
-        else if(this.state.currentSelection === "CITY"){
+        else if(this.props.selection === "CITY"){
 
             let city = this.state.textInput
             let username = "weknowit"
@@ -69,9 +71,9 @@ class SearchByComponent extends React.Component{
                 .then(data => {
                     console.log(data)
                     this.setState({
-                        result: data.geonames[0].population
+                        result: data.geonames[0].population,
+                        search: true
                     })
-
                 })
 
              console.log("CITY SEARCH")
@@ -84,18 +86,27 @@ class SearchByComponent extends React.Component{
     }
 
     render() {
+
+        let searchResults;
+        let form = <form onSubmit={this.handleSearch}>
+            <input placeholder={"Enter a "+this.props.selection} value={this.state.textInput} onChange={this.handleInput}/>
+        <input type={"submit"} value={"search"}/>
+        </form>
+        if(this.state.search === true){
+            searchResults =  <SearchResults input={this.state.textInput} result={this.state.result}/>
+            form = <div></div>
+        }
+
         return (
-            <div>This shows after selection!
-                <h2>SEARCH BY {this.state.currentSelection}</h2>
-                <form onSubmit={this.handleSearch}>
-                    <input placeholder={"Enter a "+this.state.currentSelection} value={this.state.textInput} onChange={this.handleInput}/>
-                    <input type={"submit"} value={"search"}/>
-                </form>
-                <h2>{this.state.result}</h2>
+            <div>
+                <h2>SEARCH BY {this.props.selection}</h2>
+                {form}
+                {searchResults}
+
             </div>
         )
     }
 
 }
 
-export default SearchByComponent
+export default SearchComponent

@@ -16,14 +16,18 @@ class SearchResults extends React.Component{
 
     render() {
 
-        let cities = <ul><li>Result One</li><li>Result Two</li><li>Result Two</li></ul>
-        let population = <h3>1000</h3>
+        let result = <div></div>
+        if(!Array.isArray(this.props.result)){
+            result = <h3>{this.props.result}</h3>
+        }
+        else {
+            result = this.props.result.map((city)=><li key={city.toString()}>{city}</li>)
+        }
 
         return (
-            <div>This is the result container!
+            <div>
                 <h2>{this.props.input}</h2>
-                {cities}
-                {population}
+                {result}
             </div>
         )
     }
