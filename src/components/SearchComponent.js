@@ -17,9 +17,33 @@ class SearchComponent extends React.Component{
         this.state = {
             textInput:"",
             result: "result?",
-            search: false
+            search: false,
+            loading: false
         }
 
+    }
+
+    //TODO - cityClicked and handleSearch duplicate code...
+    cityClicked=(city)=>{
+        this.setState({
+            textInput: city,
+            loading: true
+        })
+        let username = "weknowit"
+        let orderby = "population"
+        let url = "http://api.geonames.org/searchJSON?q="+city+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                this.setState({
+                    result: data.geonames[0].population,
+                    search: true,
+                    loading: false
+                })
+            })
     }
 
     //Updates input field
@@ -32,6 +56,9 @@ class SearchComponent extends React.Component{
         event.preventDefault()
         //Test Fetch:
         console.log("Starting Fetch...")
+        this.setState({
+            loading: true
+        })
 
         if(this.props.selection === "COUNTRY"){
 
@@ -52,7 +79,8 @@ class SearchComponent extends React.Component{
                     cities[2] = data.geonames[2].name;
                     this.setState({
                         result: cities,
-                        search: true
+                        search: true,
+                        loading: false
                     })
                 })
             console.log("COUNTRY SEARCH")
@@ -72,7 +100,8 @@ class SearchComponent extends React.Component{
                     console.log(data)
                     this.setState({
                         result: data.geonames[0].population,
-                        search: true
+                        search: true,
+                        loading: false
                     })
                 })
 
@@ -85,6 +114,10 @@ class SearchComponent extends React.Component{
 
     }
 
+    handleError(response){
+        console.log(response.status)
+    }
+
     render() {
 
         let searchResults;
@@ -92,8 +125,9 @@ class SearchComponent extends React.Component{
             <input placeholder={"Enter a "+this.props.selection} value={this.state.textInput} onChange={this.handleInput}/>
         <input type={"submit"} value={"search"}/>
         </form>
+
         if(this.state.search === true){
-            searchResults =  <SearchResults input={this.state.textInput} result={this.state.result}/>
+            searchResults =  <SearchResults input={this.state.textInput} result={this.state.result} cityClicked={this.cityClicked}/>
             form = <div></div>
         }
 
@@ -101,7 +135,7 @@ class SearchComponent extends React.Component{
             <div>
                 <h2>SEARCH BY {this.props.selection}</h2>
                 {form}
-                {searchResults}
+                {this.state.loading ? <h2>LOADING...</h2> : searchResults}
 
             </div>
         )

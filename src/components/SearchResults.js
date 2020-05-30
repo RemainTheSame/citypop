@@ -14,6 +14,11 @@ class SearchResults extends React.Component{
         super()
     }
 
+    cityClicked(city){
+        console.log(city+ " clicked")
+        this.props.cityClicked(city)
+    }
+
     render() {
 
         let result = <div></div>
@@ -24,7 +29,7 @@ class SearchResults extends React.Component{
         }
         else {
 
-            result = this.props.result.map((city)=><li key={city.toString()}>{city}</li>)
+            result = this.props.result.map((city)=><li onClick={()=>this.cityClicked(city)} key={city.toString()}>{city}</li>)
         }
 
         return (

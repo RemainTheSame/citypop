@@ -27,7 +27,6 @@ class MainContainer extends React.Component{
     }
 
     renderSearchComponent=(searchSelection)=>{
-
         this.setState({
             selection: searchSelection
         })
