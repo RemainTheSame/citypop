@@ -134,7 +134,7 @@ class SearchComponent extends React.Component{
 
         return (
             <div className={"searchComponent"}>
-                <h3>SEARCH BY {this.props.selection}</h3>
+                {this.state.search ? <div></div> : <h3>SEARCH BY {this.props.selection}</h3>}
                 <div className={"formContainer"}>{form}</div>
                 {this.state.loading ? <h2>LOADING...</h2> : searchResults}
 
