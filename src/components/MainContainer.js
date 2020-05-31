@@ -1,6 +1,7 @@
 import React from "react"
 import SearchSelector from "./SearchSelector";
 import SearchComponent from "./SearchComponent";
+import "../css/main.css"
 
 /*
 
@@ -50,7 +51,7 @@ class MainContainer extends React.Component{
         }
             return (
             <div>
-                <h1 onClick={this.resetMain}>CityPop</h1>
+                <h1 className={"topLogo"} onClick={this.resetMain}>CityPop</h1>
                 {searchSelector}
                 {searchComponent}
             </div>

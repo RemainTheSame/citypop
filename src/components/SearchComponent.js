@@ -1,5 +1,6 @@
 import React from "react"
 import SearchResults from "./SearchResults";
+import "../css/searchcomponent.css"
 
 /*
 
@@ -121,9 +122,9 @@ class SearchComponent extends React.Component{
     render() {
 
         let searchResults;
-        let form = <form onSubmit={this.handleSearch}>
-            <input placeholder={"Enter a "+this.props.selection} value={this.state.textInput} onChange={this.handleInput}/>
-        <input type={"submit"} value={"search"}/>
+        let form = <form  onSubmit={this.handleSearch}>
+            <input className={"searchInput"} placeholder={"Enter a "+this.props.selection} value={this.state.textInput} onChange={this.handleInput}/>
+            <input className={"searchButton"} type={"submit"} value={""}/>
         </form>
 
         if(this.state.search === true){
@@ -132,9 +133,9 @@ class SearchComponent extends React.Component{
         }
 
         return (
-            <div>
-                <h2>SEARCH BY {this.props.selection}</h2>
-                {form}
+            <div className={"searchComponent"}>
+                <h3>SEARCH BY {this.props.selection}</h3>
+                <div className={"formContainer"}>{form}</div>
                 {this.state.loading ? <h2>LOADING...</h2> : searchResults}
 
             </div>

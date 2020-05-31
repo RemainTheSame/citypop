@@ -1,4 +1,5 @@
 import React from "react"
+import "../css/searchresults.css"
 
 /*
 SearchResults
@@ -24,16 +25,16 @@ class SearchResults extends React.Component{
         let result = <div></div>
         if(!Array.isArray(this.props.result)){
 
-            let population = <h3>{this.props.result}</h3>
-            result = <div><h3>Population</h3>{population}</div>
+            let population = <h2>{this.props.result}</h2>
+            result = <div className={"cityResult"}><div>POPULATION</div>{population}</div>
         }
         else {
 
-            result = this.props.result.map((city)=><li onClick={()=>this.cityClicked(city)} key={city.toString()}>{city}</li>)
+            result = this.props.result.map((city)=><li className={"listObjectResult"} onClick={()=>this.cityClicked(city)} key={city.toString()}>{city}</li>)
         }
 
         return (
-            <div>
+            <div className={"resultContainer"}>
                 <h2>{this.props.input}</h2>
                 {result}
             </div>

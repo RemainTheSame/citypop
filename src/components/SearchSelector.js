@@ -1,5 +1,5 @@
 import React from "react"
-
+import "../css/searchselector.css"
 /*
 
 SearchSelector
@@ -27,7 +27,7 @@ class SearchSelector extends React.Component{
 
     render() {
         return (
-            <div>
+            <div className={"selectorContainer"}>
             <button onClick={this.selectCity}>SEARCH BY CITY</button>
             <button onClick={this.selectCountry}>SEARCH BY COUNTRY</button>
             </div>

@@ -1,0 +1,12 @@
+button {
+    width: 28vw;
+    height: 10vw;
+    margin-left: 10px;
+
+}
+
+.selectorContainer{
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+}
