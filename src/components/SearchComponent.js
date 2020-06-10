@@ -20,7 +20,8 @@ class SearchComponent extends React.Component{
             textInput:"",
             result: "result?",
             search: false,
-            loading: false
+            loading: false,
+            searchType: props.selection
         }
     }
 
@@ -31,20 +32,10 @@ class SearchComponent extends React.Component{
     cityClicked=(city)=>{
         this.setState({
             textInput: city,
-            loading: true
-        })
-        let username = "weknowit"
-        let orderby = "population"
-        let url = "http://api.geonames.org/searchJSON?q="+city+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-                this.setState({
-                    result: data.geonames[0].population,
-                    search: true,
-                    loading: false
-                })
+            loading: true,
+            searchType: "CITY"
+        }, function(){
+            this.handleSearch()
             })
     }
 
@@ -55,19 +46,21 @@ class SearchComponent extends React.Component{
 
     //Called when search form is submitted
     handleSearch=(event)=>{
-        event.preventDefault()
+        if(event){
+            event.preventDefault()
+        }
         //Test Fetch:
         console.log("Starting Fetch...")
         this.setState({
             loading: true
         })
 
-        if(this.props.selection === "COUNTRY"){
-            let country = this.state.textInput
-            //let country = "FR"
-            let username = "weknowit"
-            let orderby = "population"
-            let url = "http://api.geonames.org/searchJSON?q="+country+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+        let searchInput = this.state.textInput
+        let username = "weknowit"
+        let orderby = "population"
+
+        if(this.state.searchType === "COUNTRY"){
+            let url = "http://api.geonames.org/searchJSON?q="+searchInput+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
             let cities = [];
             fetch(url)
                 .then(response => response.json())
@@ -84,11 +77,8 @@ class SearchComponent extends React.Component{
                 })
             console.log("COUNTRY SEARCH")
         }
-        else if(this.props.selection === "CITY"){
-            let city = this.state.textInput
-            let username = "weknowit"
-            let orderby = "population"
-            let url = "http://api.geonames.org/searchJSON?q="+city+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
+        else if(this.state.searchType === "CITY"){
+            let url = "http://api.geonames.org/searchJSON?q="+searchInput+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
             fetch(url)
                 .then(response => response.json())
                 .then(data => {

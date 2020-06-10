@@ -14,7 +14,7 @@ class SearchResults extends React.Component{
     }
 
     // Sends info to parent component about what city in the list was clicked
-    cityClicked(city){
+    cityClicked=(city)=>{
         console.log(city+ " clicked")
         this.props.cityClicked(city)
     }
