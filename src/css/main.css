@@ -1,3 +1,75 @@
-.topLogo{
+.topLogoInner{
+    /*background-color: 	#944dd3;*/
+    background-color: white;
+    border-radius: 19px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #944dd3;
+    font-size: 20px;
+    transition: 0.3s ease 0s;
+    cursor: pointer;
+}
+
+.topLogoInner:hover{
+    color: white;
+    background-color: #944dd3;
+    content: "Back";
+}
+
+/*Create ripple effec*/
+
+.ripple {
+    position: relative;
+    overflow: hidden;
+    transform: translate3d(0, 0, 0);
+}
+
+.ripple:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    transform: scale(10, 10);
+    opacity: 0;
+    transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+    transform: scale(0, 0);
+    opacity: .3;
+    transition: 0s;
+}
+
+
+.topLogoInner > h2 {
+    color: #944dd3;
+    font-weight: normal;
+}
+
+
+.topLogoOuter{
     margin-top: 10vh;
+    border-radius: 20px;
+    /*border: #944dd3 1px solid;*/
+    width: 200px;
+    height: 70px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

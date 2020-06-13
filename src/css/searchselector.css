@@ -2,11 +2,30 @@ button {
     width: 28vw;
     height: 10vw;
     margin-left: 10px;
+    border-radius: 20px;
+    border-color: transparent;
+    background-color: #944dd3;
+    color: white;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+button:hover{
+    color: #944dd3;
+    background-color: white;
 }
 
 .selectorContainer{
     margin-top: 8vh;
     display: flex;
     justify-content: center;
+}
+
+button >img{
+    width: 25%;
+    height: 50%;
+    float: left;
 }

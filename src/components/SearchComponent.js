@@ -1,7 +1,8 @@
 import React from "react"
 import SearchResults from "./SearchResults";
 import "../css/searchcomponent.css"
-
+import flag from "../res/flag-icon.png"
+import city  from "../res/city-icon.png"
 /*
 
 SearchComponent
@@ -111,9 +112,18 @@ class SearchComponent extends React.Component{
             form = <div></div>
         }
 
+        let image;
+
+        if(this.state.searchType === "CITY"){
+            image = city
+        }
+        else {
+            image = flag
+        }
+
         return (
             <div className={"searchComponent"}>
-                {this.state.search ? <div></div> : <h3>SEARCH BY {this.props.selection}</h3>}
+                {this.state.search ? <div></div> : <img src={image}/>}
                 <div className={"formContainer"}>{form}</div>
                 {this.state.loading ? <h2>LOADING...</h2> : searchResults}
 

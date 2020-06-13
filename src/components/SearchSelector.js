@@ -1,5 +1,7 @@
 import React from "react"
 import "../css/searchselector.css"
+import flag from "../res/flag-icon.png"
+import city from "../res/city-icon.png"
 /*
 
 SearchSelector
@@ -28,8 +30,12 @@ class SearchSelector extends React.Component{
     render() {
         return (
             <div className={"selectorContainer"}>
-            <button onClick={this.selectCity}>SEARCH BY CITY</button>
-            <button onClick={this.selectCountry}>SEARCH BY COUNTRY</button>
+            <button onClick={this.selectCity}>
+                <img src={city}/>
+                Search by CITY</button>
+            <button onClick={this.selectCountry}>
+                <img src={flag}/>
+                Search by COUNTRY</button>
             </div>
         )
     }

@@ -13,10 +13,13 @@
 
 .searchInput{
     text-align: center;
-    border-radius: 0;
-    border: solid 1.5px black;
+    /*border: solid 1.5px black;*/
+    border-radius: 20px;
+    border: transparent;
     width: 40vw;
     height: 5vw;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    border-top-style: hidden;
 }
 
 .searchButton{
@@ -24,13 +27,30 @@
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: center;
+    background-color: white;
     width: 30px;
     height:30px;
     border-radius: 50%;
     margin-top: 7px;
-    border: solid 1.5px black;
+    border: none;
+    box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+
+}
+
+input{
+    border-top-style: hidden;
 }
 
 .searchComponent{
+    width: 100%;
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
+img {
+    width: 70px;
+    height: 70px;
 }

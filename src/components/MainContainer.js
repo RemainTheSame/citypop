@@ -17,7 +17,8 @@ class MainContainer extends React.Component{
     constructor(){
         super()
         this.state={
-            selection: "none"
+            selection: "none",
+            logoHover: false
         }
     }
 
@@ -34,6 +35,12 @@ class MainContainer extends React.Component{
             selection: searchSelection
         })
         console.log("selection updated")
+    }
+
+    logoHover=()=>{
+        this.setState({
+            logoHover: !this.state.logoHover,
+        })
     }
 
     render() {
@@ -54,9 +61,20 @@ class MainContainer extends React.Component{
             searchComponent = <SearchComponent selection={this.state.selection}/>
             searchSelector = <div></div>
         }
+        let logoText = "CityPop";
+
+        if(this.state.logoHover){
+            logoText = "🡠 Back"
+        }
+
             return (
-            <div>
-                <h1 className={"topLogo"} onClick={this.resetMain}>CityPop</h1>
+            <div className={"mainContainer"}>
+                <div className={"topLogoOuter"}>
+                    <div className={"topLogoInner ripple"} onMouseEnter={this.logoHover} onMouseLeave={this.logoHover} onClick={this.resetMain}>{logoText}
+
+                    </div>
+                </div>
+
                 {searchSelector}
                 {searchComponent}
             </div>
