@@ -94,8 +94,6 @@ class SearchComponent extends React.Component{
                 })
              console.log("CITY SEARCH")
         }
-
-        //this.spacePopString(this.state.result)
     }
 
     // TODO handle errors

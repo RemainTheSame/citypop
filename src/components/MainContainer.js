@@ -44,7 +44,6 @@ class MainContainer extends React.Component{
     }
 
     render() {
-        console.log("rerender")
         let searchComponent;
         let searchSelector = <SearchSelector selection={this.renderSearchComponent}/>
         // Dont show search component if no selection made
