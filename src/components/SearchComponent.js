@@ -85,19 +85,26 @@ class SearchComponent extends React.Component{
                 .then(data => {
                     console.log(data)
                     this.setState({
-                        result: data.geonames[0].population,
+                        result: this.spacePopString(data.geonames[0].population),
                         search: true,
                         loading: false
+                    }, function () {
+                        console.log("Search done")
                     })
                 })
              console.log("CITY SEARCH")
         }
-        console.log("Search done")
+
+        //this.spacePopString(this.state.result)
     }
 
     // TODO handle errors
     handleError(response){
         console.log(response.status)
+    }
+
+    spacePopString(num){
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
     render() {
