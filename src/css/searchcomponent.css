@@ -34,7 +34,13 @@
     margin-top: 7px;
     border: none;
     box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
 
+}
+
+.searchButton:active{
+    background-color: #944dd3;
 }
 
 input{
