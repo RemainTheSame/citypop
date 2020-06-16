@@ -11,10 +11,6 @@ SearchSelector
 
  */
 class SearchSelector extends React.Component{
-    constructor(){
-        super()
-
-    }
 
     selectCity=()=>{
         console.log("City selected..")

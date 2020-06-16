@@ -9,9 +9,6 @@ SearchResults
 
  */
 class SearchResults extends React.Component{
-    constructor(){
-        super()
-    }
 
     // Sends info to parent component about what city in the list was clicked
     cityClicked=(city)=>{
