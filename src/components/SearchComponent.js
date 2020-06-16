@@ -50,55 +50,89 @@ class SearchComponent extends React.Component{
         if(event){
             event.preventDefault()
         }
-        //Test Fetch:
-        console.log("Starting Fetch...")
-        this.setState({
-            loading: true
-        })
-
-        let searchInput = this.state.textInput
-        let username = "weknowit"
-        let orderby = "population"
-
-        if(this.state.searchType === "COUNTRY"){
-            let url = "http://api.geonames.org/searchJSON?q="+searchInput+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
-            let cities = [];
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                    cities[0] = data.geonames[0].name;
-                    cities[1] = data.geonames[1].name;
-                    cities[2] = data.geonames[2].name;
-                    this.setState({
-                        result: cities,
-                        search: true,
-                        loading: false
-                    })
-                })
-            console.log("COUNTRY SEARCH")
+        //test input
+        if(this.checkEmptyInput(this.state.textInput)){
+            alert("Please enter the name of a " + this.state.searchType)
         }
-        else if(this.state.searchType === "CITY"){
-            let url = "http://api.geonames.org/searchJSON?q="+searchInput+"&username="+username+"&orderby="+orderby+"&cities=cities1000"
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                    this.setState({
-                        result: this.spacePopString(data.geonames[0].population),
-                        search: true,
-                        loading: false
-                    }, function () {
-                        console.log("Search done")
+        else {
+            //Test Fetch:
+            console.log("Starting Fetch...")
+            this.setState({
+                loading: true
+            })
+
+            let searchInput = this.state.textInput
+            let username = "weknowit"
+            let orderby = "population"
+
+            if (this.state.searchType === "COUNTRY") {
+                let url = "http://api.geonames.org/searchJSON?q=" + searchInput + "&username=" + username + "&orderby=" + orderby + "&cities=cities1000"
+                let cities = [];
+                fetch(url)
+                    .then(response => response.json()
+
+                    )
+                    .then(data => {
+                        if(data.geonames.length !== 0){
+                            console.log(data)
+                            cities[0] = data.geonames[0].name;
+                            cities[1] = data.geonames[1].name;
+                            cities[2] = data.geonames[2].name;
+                            this.setState({
+                                result: cities,
+                                search: true,
+                                loading: false
+                            },function () {
+                                console.log("Search done")
+                            })
+                        }
+                        else {
+                            this.setState({
+                                loading: false,
+                                search: false,
+                            })
+                            this.handleUndefinedError()
+                        }
+
                     })
-                })
-             console.log("CITY SEARCH")
+                console.log("COUNTRY SEARCH")
+            } else if (this.state.searchType === "CITY") {
+                let url = "http://api.geonames.org/searchJSON?q=" + searchInput + "&username=" + username + "&orderby=" + orderby + "&cities=cities1000"
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if(data.geonames.length){
+                            console.log(data)
+                            this.setState({
+                                result: this.spacePopString(data.geonames[0].population),
+                                search: true,
+                                loading: false
+                            }, function () {
+                                console.log("Search done")
+                            })
+                        }
+                        else{
+                            this.setState({
+                                loading: false,
+                                search: false,
+                            })
+                            this.handleUndefinedError()
+                        }
+
+                    })
+                console.log("CITY SEARCH")
+            }
         }
     }
 
     // TODO handle errors
-    handleError(response){
-        console.log(response.status)
+    handleUndefinedError(){
+        alert(this.state.searchType +": " + this.state.textInput + " does not exist.")
+    }
+
+    //uses regex to replace all white spaces and check no input
+    checkEmptyInput(input){
+        return !input.replace(/\s/g, '').length || input === "";
     }
 
     spacePopString(num){
